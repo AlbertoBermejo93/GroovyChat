@@ -16,7 +16,7 @@ class Conversation
     private ?int $id = null;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Participant::class)]
-    private Collection $participant;
+    private Collection $participants;
 
     #[ORM\OneToMany(mappedBy: 'conversation', targetEntity: Message::class)]
     private Collection $messages;
@@ -26,7 +26,7 @@ class Conversation
 
     public function __construct()
     {
-        $this->participant = new ArrayCollection();
+        $this->participants = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
 
@@ -40,13 +40,13 @@ class Conversation
      */
     public function getParticipant(): Collection
     {
-        return $this->participant;
+        return $this->participants;
     }
 
     public function addParticipant(Participant $participant): self
     {
-        if (!$this->participant->contains($participant)) {
-            $this->participant->add($participant);
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
             $participant->setConversation($this);
         }
 
@@ -55,7 +55,7 @@ class Conversation
 
     public function removeParticipant(Participant $participant): self
     {
-        if ($this->participant->removeElement($participant)) {
+        if ($this->participants->removeElement($participant)) {
             // set the owning side to null (unless already changed)
             if ($participant->getConversation() === $this) {
                 $participant->setConversation(null);

@@ -29,6 +29,8 @@ class Message
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
+    private $mine;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +88,26 @@ class Message
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mine
+     */ 
+    public function getMine()
+    {
+        return $this->mine;
+    }
+
+    /**
+     * Set the value of mine
+     *
+     * @return  self
+     */ 
+    public function setMine($mine)
+    {
+        $this->mine = $mine;
 
         return $this;
     }
