@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\WebLink\Link;
 
 class ConversationController extends AbstractController
 {
@@ -86,8 +87,12 @@ class ConversationController extends AbstractController
     }
 
     #[Route('/conversations', name: 'getConversations', methods:['GET'])]
-    public function getConversations() {
+    public function getConversations(Request $request) {
         $conversations = $this->conversationRepository->findConversationsByUser($this->getUser()->getId());
+
+        $hubUrl = $this->getParameter('mercure.default_hub');
+
+        $this->addLink($request, new Link('mercure', $hubUrl));
         
         return $this->json($conversations);
     }
