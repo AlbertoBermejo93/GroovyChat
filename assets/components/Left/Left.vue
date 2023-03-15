@@ -8,7 +8,7 @@
 
         <div class="messages-box">
           <div class="list-group rounded-0">
-                <Conversation/>
+                <Conversation :conversation="conversation"/>
           </div>
         </div>
       </div>
@@ -16,8 +16,18 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     import Conversation from './Conversation.vue';
+
     export default {
-        components: {Conversation}
+      
+        components: {Conversation},
+        computed: {
+          ...mapGetters(["CONVERSATIONS"])
+        },
+        mounted(){
+          this.$store.dispatch("GET_CONVERSATIONS")
+            .then()
+        }
     }
 </script>

@@ -9,7 +9,6 @@
         "core-js": "^3.23.0",
         "regenerator-runtime": "^0.13.9",
         "sass": "^1.59.2",
-        "sass-loader": "^13.0.0",
         "vue": "^2.5",
         "vue-loader": "^15",
         "vue-template-compiler": "^2.7.14",
@@ -26,6 +25,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "sass-loader": "^13.2.0",
         "vuex": "^4.0.2"
     }
 }
